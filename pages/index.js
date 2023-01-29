@@ -5,66 +5,114 @@ import { useState } from "react";
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
 
-  const [pictures, setPictures] = useState([
+  const [products, setPictures] = useState([
+    {
+      id: 0,
+      sku: "GX6947",
+      name: "adidas Adilette Slide Carbon Aluminium",
+      size: "38",
+      product_url:
+        "https://restocks.net/nl/p/adidas-adilette-slides-carbon-aluminium",
+      image_url:
+        "https://media.restocks.net/products/GX6947/adidas-adilette-slides-carbon-aluminium-1-400.png",
+      alt: "adidas-adilette-slides-carbon-aluminium",
+    },
     {
       id: 1,
-      url: "https://media.restocks.net/products/CW1590-100/nike-dunk-low-retro-white-black-gs-1-400.png",
+      sku: "DH6927-111",
+      name: "Air Jordan 4 Retro Military Black",
+      size: "42",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-military-black",
+      image_url:
+        "https://media.restocks.net/products/DH6927-111/air-jordan-4-retro-military-black-1-400.png",
+      alt: "air-jordan-4-retro-military-black",
     },
     {
       id: 2,
-      url: "https://media.restocks.net/products/DD1391-103/nike-dunk-low-grey-fog-1-400.png",
+      sku: "DH6927-140",
+      name: "Air Jordan 4 Retro White Midnight Navy",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-white-midnight-navy",
+      image_url:
+        "https://media.restocks.net/products/DH6927-140/air-jordan-4-retro-white-midnight-navy-1-400.png",
+      alt: "air-jordan-4-retro-white-midnight-navy",
     },
     {
       id: 3,
-      url: "https://media.restocks.net/products/DJ4695-122/air-jordan-1-mid-gym-red-black-white-gs-1-400.png",
+      sku: "553558-615",
+      name: "Air Jordan 1 Low Bordeaux",
+      size: "41",
+      product_url: "https://restocks.net/nl/p/air-jordan-1-low-bordeaux",
+      image_url:
+        "https://media.restocks.net/products/553558-615/air-jordan-1-low-bordeaux-1-400.png",
+      alt: "air-jordan-1-low-bordeaux",
     },
     {
       id: 4,
-      url: "https://media.restocks.net/products/DN6998-700/air-jordan-1-low-snkrs-day-1-400.png",
+      sku: "DC0774-114",
+      name: "Air Jordan 1 Low Marina Blue (W)",
+      size: "36,5",
+      product_url: "https://restocks.net/nl/p/air-jordan-1-low-marina-blue-w",
+      image_url:
+        "https://media.restocks.net/products/DC0774-114/air-jordan-1-low-marina-blue-w-1-400.png",
+      alt: "air-jordan-1-low-marina-blue-w",
     },
     {
       id: 5,
-      url: "https://media.restocks.net/products/554724-411/air-jordan-1-mid-dark-teal-1-400.png",
+      sku: "555088-711",
+      name: "Air Jordan 1 Retro High OG Yellow Toe",
+      size: "40",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-1-retro-high-og-yellow-toe",
+      image_url:
+        "https://media.restocks.net/products/555088-711/air-jordan-1-retro-high-og-yellow-toe-1-400.png",
+      alt: "air-jordan-1-retro-high-og-yellow-toe",
     },
     {
       id: 6,
-      url: "https://media.restocks.net/products/554724-411/air-jordan-1-mid-dark-teal-1-400.png",
+      sku: "555088-711",
+      name: "Air Jordan 1 Retro High OG Yellow Toe",
+      size: "40,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-1-retro-high-og-yellow-toe",
+      image_url:
+        "https://media.restocks.net/products/555088-711/air-jordan-1-retro-high-og-yellow-toe-1-400.png",
+      alt: "air-jordan-1-retro-high-og-yellow-toe",
     },
     {
       id: 7,
-      url: "https://media.restocks.net/products/554724-411/air-jordan-1-mid-dark-teal-1-400.png",
-    },
-    {
-      id: 8,
-      url: "https://media.restocks.net/products/554724-411/air-jordan-1-mid-dark-teal-1-400.png",
-    },
-    {
-      id: 9,
-      url: "https://media.restocks.net/products/554724-411/air-jordan-1-mid-dark-teal-1-400.png",
+      sku: "555088-711",
+      name: "Air Jordan 1 Retro High OG Yellow Toe",
+      size: "40,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-1-retro-high-og-yellow-toe",
+      image_url:
+        "https://media.restocks.net/products/555088-711/air-jordan-1-retro-high-og-yellow-toe-1-400.png",
+      alt: "air-jordan-1-retro-high-og-yellow-toe",
     },
     {
       id: 10,
-      url: "https://media.restocks.net/products/554724-411/air-jordan-1-mid-dark-teal-1-400.png",
+      sku: "555088-711",
+      name: "Air Jordan 1 Retro High OG Yellow Toe",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-1-retro-high-og-yellow-toe",
+      image_url:
+        "https://media.restocks.net/products/555088-711/air-jordan-1-retro-high-og-yellow-toe-1-400.png",
+      alt: "air-jordan-1-retro-high-og-yellow-toe",
     },
     {
-      id: 11,
-      url: "https://media.restocks.net/products/554724-411/air-jordan-1-mid-dark-teal-1-400.png",
-    },
-    {
-      id: 12,
-      url: "https://media.restocks.net/products/554724-411/air-jordan-1-mid-dark-teal-1-400.png",
-    },
-    {
-      id: 13,
-      url: "https://media.restocks.net/products/554724-411/air-jordan-1-mid-dark-teal-1-400.png",
-    },
-    {
-      id: 14,
-      url: "https://media.restocks.net/products/554724-411/air-jordan-1-mid-dark-teal-1-400.png",
-    },
-    {
-      id: 15,
-      url: "https://media.restocks.net/products/554724-411/air-jordan-1-mid-dark-teal-1-400.png",
+      id: 19,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
     },
   ]);
 
@@ -75,29 +123,39 @@ export default function Home() {
         <meta name="description" content="Generated by create next app" />
       </Head>
       <main
-        className="bg-white font-mandali dark:bg-gray-900 dark:text-white 
+        className="font-mandali dark:bg-gray-900 dark:text-white 
         text-center min-h-screen flex flex-col"
       >
         <section className="px-5 md:px-10">
-          <nav className="py-10 flex justify-between">
-            <h1 className="text-xl font-[600]">Sneaker Portfolio</h1>
-            <ul className=" flex items-center">
-              <BsFillMoonStarsFill
-                className="cursor-pointer text-2xl"
-                onClick={() => setDarkMode((prev) => !prev)}
-              />
-            </ul>
+          <nav className="py-10 flex justify-between items-center">
+            <h1 className="text-xl md:text-4xl font-[600] mr-12">
+              Sneaker Portfolio
+            </h1>
+            <BsFillMoonStarsFill
+              className="cursor-pointer text-lg md:text-2xl "
+              onClick={() => setDarkMode((prev) => !prev)}
+            />
           </nav>
         </section>
-        <section className="flex-1">
-          <div className="w-full flex justify-center flex-wrap items-stretch">
-            {pictures.map((picture) => (
-              <div key={picture.id} className="w-1/3 md:w-1/4 lg:w-1/6">
-                <img
-                  src={`https://images.weserv.nl/?url=${picture.url}?fit=fill&w=300&h=214&fm=webp&auto=compress&trim=color&q=90&dpr=2`}
-                  alt={`picture ${picture.id}`}
-                  className=""
-                />
+        <section className="flex-1 md:mx-12">
+          <div className="w-full flex justify-center flex-wrap">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="group relative text-xs md:text-sm lg:text-lg cursor-pointer rounded-xl hover:bg-gray-100 hover:shadow-inner hover:delay-75 dark:hover:bg-gray-500  w-1/3 md:w-1/4 lg:w-1/6"
+              >
+                <a href={product.product_url}>
+                  <img
+                    src={`https://images.weserv.nl/?url=${product.image_url}?fit=fill&w=300&h=214&fm=webp&auto=compress&trim=color&q=90&dpr=2`}
+                    alt={`${product.alt}`}
+                  />
+                </a>
+                <p className="leading-1 md:leading-normal mx-1">
+                  {product.name}
+                </p>
+                <span className="absolute top-1 left-2 font-bold bg-gray-100 group-hover:bg-white dark:group-hover:bg-gray-900 group-hover:delay-75 dark:bg-gray-700 rounded-xl p-1">
+                  {product.size}
+                </span>
               </div>
             ))}
           </div>
