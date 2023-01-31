@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Modal, Spin } from "antd";
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [products, setPictures] = useState([
+  const [products] = useState([
     {
       id: 0,
       sku: "GX6947",
@@ -114,6 +114,19 @@ export default function Home() {
       alt: "air-jordan-4-retro-se-black-canvas",
     },
   ]);
+  const [darkMode, setDarkMode] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const handleImageClick = (product) => {
+    setSelectedProduct(product);
+    setLoading(true);
+  };
+
+  const handleModalClose = () => {
+    setSelectedProduct(null);
+    setLoading(false);
+  };
 
   return (
     <div className={darkMode ? "dark" : ""}>
@@ -128,7 +141,7 @@ export default function Home() {
       >
         <section className="relative px-5 md:px-10">
           <nav className="relative py-5 md:py-10 flex justify-center items-center gap-3">
-            <h1 className="text-xl md:text-4xl font-[600]">WTS</h1>
+            <h1 className="text-xl md:text-4xl font-[600]">Bottled Kicks</h1>
             <img src="/trainers.png" alt="trainers" className="h-8 md:h-10" />
             <div
               className={`absolute right-[1%] cursor-pointer text-lg md:text-2xl`}
@@ -148,7 +161,10 @@ export default function Home() {
                 <img
                   src={`https://images.weserv.nl/?url=${product.image_url}?fit=fill&w=300&h=214&fm=webp&auto=compress&trim=color&q=90&dpr=2`}
                   alt={`${product.alt}`}
+                  onClick={() => handleImageClick(product)}
+                  className="max-h-full max-w-full rounded-t-xl"
                 />
+
                 <p className="leading-1 md:leading-normal mx-1">
                   {product.name}
                 </p>
@@ -158,6 +174,25 @@ export default function Home() {
               </div>
             ))}
           </div>
+          {selectedProduct && (
+            <Modal
+              title={selectedProduct.name}
+              open={selectedProduct !== null}
+              onCancel={handleModalClose}
+              width={800}
+              footer={null}
+            >
+              <Spin spinning={loading}>
+                <div>
+                  <img
+                    src={(selectedProduct?.image_url).replace("400", "1000")}
+                    onLoad={() => setLoading(false)}
+                    className="max-h-full max-w-full"
+                  />
+                </div>
+              </Spin>
+            </Modal>
+          )}
         </section>
       </main>
     </div>
