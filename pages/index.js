@@ -1,7 +1,13 @@
 import Head from "next/head";
-import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
-import { useState, useEffect } from "react";
+import {
+  BsFillSunFill,
+  BsFillMoonStarsFill,
+  BsClipboardCheck,
+} from "react-icons/bs";
+import { BiCopy } from "react-icons/bi";
+import { useState } from "react";
 import { Modal, Spin } from "antd";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 export default function Home() {
   const [products] = useState([
@@ -117,6 +123,7 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
 
   const handleImageClick = (product) => {
     setSelectedProduct(product);
@@ -126,6 +133,13 @@ export default function Home() {
   const handleModalClose = () => {
     setSelectedProduct(null);
     setLoading(false);
+  };
+
+  const handleCopy = () => {
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 3000);
   };
 
   return (
@@ -168,7 +182,7 @@ export default function Home() {
                 <p className="leading-1 md:leading-normal mx-1">
                   {product.name}
                 </p>
-                <span className="absolute top-1 left-2 font-bold bg-gray-100 group-hover:bg-white dark:group-hover:bg-gray-900 group-hover:delay-75 dark:bg-gray-700 rounded-xl p-1">
+                <span className="absolute top-1 left-2 font-bold bg-gray-100 group-hover:bg-white dark:group-hover:bg-gray-900 group-hover:delay-75 dark:bg-gray-700 rounded-lg p-1 tracking-tight ">
                   {product.size}
                 </span>
               </div>
@@ -176,19 +190,37 @@ export default function Home() {
           </div>
           {selectedProduct && (
             <Modal
-              title={selectedProduct.name}
+              title={null}
               open={selectedProduct !== null}
               onCancel={handleModalClose}
               width={800}
               footer={null}
             >
               <Spin spinning={loading}>
-                <div>
+                <div className="flex flex-col items-center text-center">
+                  <h1 className="text-lg md:text-2xl font-mandali">
+                    {selectedProduct.name}
+                  </h1>
+                  <h2 className="text-lg text-gray-400 font-mandali">
+                    {selectedProduct.sku}
+                  </h2>
                   <img
                     src={(selectedProduct?.image_url).replace("400", "1000")}
                     onLoad={() => setLoading(false)}
-                    className="max-h-full max-w-full"
+                    className="max-h-full max-w-full md:-mb-6"
                   />
+                  <CopyToClipboard
+                    text={`${selectedProduct.name} | ${selectedProduct.sku} | EU ${selectedProduct.size}`}
+                    onCopy={handleCopy}
+                  >
+                    <div className="text-gray-400 p-2 cursor-pointer rounded-lg flex justify-center items-center">
+                      {copied ? (
+                        <BsClipboardCheck className="h-6 text-2xl"></BsClipboardCheck>
+                      ) : (
+                        <BiCopy className="h-6 text-2xl" />
+                      )}
+                    </div>
+                  </CopyToClipboard>
                 </div>
               </Spin>
             </Modal>
