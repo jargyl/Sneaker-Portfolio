@@ -112,7 +112,150 @@ export default function Home() {
       alt: "air-jordan-1-retro-high-og-yellow-toe",
     },
     {
+      id: 11,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 12,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 13,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 14,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 15,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 16,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 17,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 18,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
       id: 19,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 20,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 21,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 22,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 23,
+      sku: "DH7138-006",
+      name: "Jordan 4 Retro SE Black Canvas",
+      size: "42,5",
+      product_url:
+        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
+      image_url:
+        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
+      alt: "air-jordan-4-retro-se-black-canvas",
+    },
+    {
+      id: 24,
       sku: "DH7138-006",
       name: "Jordan 4 Retro SE Black Canvas",
       size: "42,5",
@@ -168,7 +311,7 @@ export default function Home() {
       </Head>
       <main
         className="font-mandali dark:bg-gray-900 dark:text-white 
-        text-center flex flex-col"
+        text-center flex flex-col fixed overflow-y-scroll w-full h-full"
       >
         <section className="relative px-5 md:px-10">
           <nav className="relative py-5 md:py-10 flex justify-center items-center gap-3">
@@ -187,8 +330,8 @@ export default function Home() {
           </nav>
         </section>
 
-        <section className="flex-1 md:mx-12">
-          <div className="w-full flex justify-center flex-wrap">
+        <section className="flex-1 md:mx-12 mb-20">
+          <div className="flex justify-center flex-wrap ">
             {products
               .filter(
                 (product) =>
@@ -253,7 +396,7 @@ export default function Home() {
             </Modal>
           )}
         </section>
-        <section className="fixed bottom-0 left-0 pt-10 right-0 mx-auto flex justify-center">
+        <section className=" dark:text-white fixed bottom-0 left-0 right-0 flex justify-center">
           <Select
             mode="multiple"
             showArrow={true}
