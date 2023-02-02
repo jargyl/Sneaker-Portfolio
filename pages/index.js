@@ -168,7 +168,7 @@ export default function Home() {
       </Head>
       <main
         className="font-mandali dark:bg-gray-900 dark:text-white 
-        text-center min-h-screen flex flex-col"
+        text-center flex flex-col"
       >
         <section className="relative px-5 md:px-10">
           <nav className="relative py-5 md:py-10 flex justify-center items-center gap-3">
