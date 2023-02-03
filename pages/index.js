@@ -13,7 +13,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 const { Option } = Select;
 
 export default function Home() {
-  const [products] = useState([
+  const data = [
     {
       id: 0,
       sku: "GX6947",
@@ -265,7 +265,15 @@ export default function Home() {
         "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
       alt: "air-jordan-4-retro-se-black-canvas",
     },
-  ]);
+  ];
+
+  data.sort((a, b) => {
+    const sizeA = parseFloat(a.size.replace(",", "."));
+    const sizeB = parseFloat(b.size.replace(",", "."));
+    return sizeA - sizeB;
+  });
+  const [products] = useState(data);
+
   const [darkMode, setDarkMode] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -313,8 +321,8 @@ export default function Home() {
         className="font-mandali dark:bg-gray-900 dark:text-white 
         text-center flex flex-col fixed overflow-y-scroll w-full h-full"
       >
-        <section className="relative px-5 md:px-10">
-          <nav className="relative py-5 md:py-6 flex justify-center items-center">
+        <section className="relative px-5 md:px-10 pb-[10vh] md:pb-[13vh] ">
+          <nav className="dark:bg-gray-900 dark:text-white fixed top-0 left-0 right-0 z-10 flex justify-center items-center bg-white h-[7vh] md:h-[10vh] border-solid border-t-0 border-x-0 border-gray-100 dark:border-gray-800 ">
             <div className="flex items-center gap-1">
               <h1 className="text-2xl md:text-4xl font-[600]">Bottled Kicks</h1>
               <img
