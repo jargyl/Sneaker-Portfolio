@@ -9,6 +9,8 @@ import { BiCopy } from "react-icons/bi";
 import { useState } from "react";
 import { Modal, Spin, Select, Button } from "antd";
 import CopyToClipboard from "react-copy-to-clipboard";
+import "simplebar-react/dist/simplebar.min.css";
+import SimpleBarReact from "simplebar-react";
 
 const { Option } = Select;
 
@@ -345,7 +347,7 @@ export default function Home() {
           </nav>
         </section>
 
-        <section className="flex-1 md:mx-12 pb-16 pt-5 overflow-y-scroll">
+        <SimpleBarReact className="flex-1 md:mx-12 pb-16 pt-5 h-0">
           <div className="flex justify-center flex-wrap ">
             {products
               .filter(
@@ -410,7 +412,7 @@ export default function Home() {
               </Spin>
             </Modal>
           )}
-        </section>
+        </SimpleBarReact>
         <section className=" dark:text-white fixed bottom-0 left-0 right-0 flex justify-center">
           <Select
             mode="multiple"
