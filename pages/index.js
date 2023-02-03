@@ -319,10 +319,10 @@ export default function Home() {
       </Head>
       <main
         className="font-mandali dark:bg-gray-900 dark:text-white 
-        text-center flex flex-col fixed overflow-y-scroll w-full h-full"
+        text-center flex flex-col fixed w-full h-full"
       >
-        <section className="relative px-5 md:px-10 pb-[10vh] md:pb-[13vh] ">
-          <nav className="dark:bg-gray-900 dark:text-white fixed top-0 left-0 right-0 z-10 flex justify-center items-center bg-white h-[7vh] md:h-[10vh] border-solid border-t-0 border-x-0 border-gray-100 dark:border-gray-800 ">
+        <section className="relative px-5 md:px-10 pb-[5vh] md:pb-[10vh] ">
+          <nav className="dark:bg-gray-900 dark:text-white fixed top-0 left-0 right-0 z-10 flex justify-center items-center bg-white h-[7vh] md:h-[10vh] border-solid border-t-0 border-x-0  border-gray-100 dark:border-gray-800 ">
             <div className="flex items-center gap-1">
               <h1 className="text-2xl md:text-4xl font-[600]">Bottled Kicks</h1>
               <img
@@ -333,7 +333,7 @@ export default function Home() {
             </div>
 
             <div
-              className={`absolute right-[1%] cursor-pointer text-lg md:text-2xl`}
+              className={`fixed right-[1%] pr-3 cursor-pointer text-lg md:text-2xl flex`}
               onClick={() => setDarkMode((prev) => !prev)}
             >
               {darkMode ? (
@@ -345,7 +345,7 @@ export default function Home() {
           </nav>
         </section>
 
-        <section className="flex-1 md:mx-12 mb-20">
+        <section className="flex-1 md:mx-12 pb-16 pt-5 overflow-y-scroll">
           <div className="flex justify-center flex-wrap ">
             {products
               .filter(
