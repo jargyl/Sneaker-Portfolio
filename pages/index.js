@@ -269,29 +269,51 @@ export default function Home() {
     },
   ];
 
-  data.sort((a, b) => {
+  //Count quantity of products
+  const productMap = data.reduce((acc, product) => {
+    const key = `${product.sku}_${product.size}`;
+    acc[key] = acc[key] ? acc[key] + 1 : 1;
+    return acc;
+  }, {});
+  //Add quantity to products
+  const filteredProducts = data.map((product) => {
+    const key = `${product.sku}_${product.size}`;
+    return {
+      ...product,
+      quantity: productMap[key],
+    };
+  });
+  //Filter out duplicates
+  const filteredItems = filteredProducts.filter((item, index, self) => {
+    return (
+      self.findIndex((t) => t.sku === item.sku && t.size === item.size) ===
+      index
+    );
+  });
+  //Sort products by size
+  filteredItems.sort((a, b) => {
     const sizeA = parseFloat(a.size.replace(",", "."));
     const sizeB = parseFloat(b.size.replace(",", "."));
     return sizeA - sizeB;
   });
-  const [products] = useState(data);
 
+  const [products] = useState(filteredItems);
+  const [showQuantity] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
-
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedSizes, setSelectedSizes] = useState([]);
 
   const handleSizeChange = (sizes) => {
     setSelectedSizes(sizes);
   };
 
-  const handleReset = () => {
+  const handleResetSizes = () => {
     setSelectedSizes([]);
   };
 
-  const handleImageClick = (product) => {
+  const handleModalOpen = (product) => {
     setSelectedProduct(product);
     setLoading(true);
   };
@@ -324,8 +346,8 @@ export default function Home() {
         text-center flex flex-col fixed w-full h-full"
       >
         <section className="relative px-5 md:px-10 pb-[5vh] md:pb-[10vh] ">
-          <nav className="dark:bg-gray-900 dark:text-white fixed top-0 left-0 right-0 z-10 flex justify-center items-center bg-white h-[7vh] md:h-[10vh] border-solid border-t-0 border-x-0  border-gray-100 dark:border-gray-800 ">
-            <div className="flex items-center gap-1">
+          <nav className="dark:bg-gray-900 dark:text-white fixed top-0 left-0 right-0 z-10 flex justify-center items-center bg-white h-[7vh] md:h-[10vh] border-solid border-t-0 border-x-0 border-b-2 border-gray-100 dark:border-gray-800 ">
+            <div className="flex items-center gap-1 select-none cursor-pointer">
               <h1 className="text-2xl md:text-4xl font-[600]">Bottled Kicks</h1>
               <img
                 src="/bottledkicks.png"
@@ -362,7 +384,7 @@ export default function Home() {
                   <img
                     src={`https://images.weserv.nl/?url=${product.image_url}?fit=fill&w=300&h=214&fm=webp&auto=compress&trim=color&q=90&dpr=2`}
                     alt={`${product.alt}`}
-                    onClick={() => handleImageClick(product)}
+                    onClick={() => handleModalOpen(product)}
                     className="max-h-full max-w-full rounded-t-xl"
                   />
 
@@ -370,7 +392,14 @@ export default function Home() {
                     {product.name}
                   </p>
                   <span className="absolute top-1 left-2 font-bold bg-gray-100 group-hover:bg-white dark:group-hover:bg-gray-900 group-hover:delay-75 dark:bg-gray-700 rounded-lg p-1 tracking-tight ">
-                    {product.size}
+                    <p className={showQuantity ? "group-hover:hidden" : ""}>
+                      {product.size}
+                    </p>
+                    {showQuantity && (
+                      <p className="hidden group-hover:block text-sm">
+                        Quantity: {product.quantity}
+                      </p>
+                    )}
                   </span>
                 </div>
               ))}
@@ -391,6 +420,7 @@ export default function Home() {
                   <h2 className="text-lg text-gray-400 font-mandali">
                     {selectedProduct.sku}
                   </h2>
+
                   <img
                     src={(selectedProduct?.image_url).replace("400", "1000")}
                     onLoad={() => setLoading(false)}
@@ -437,7 +467,7 @@ export default function Home() {
             type="default"
             icon={<MdClear className="opacity-60" />}
             className="flex items-center justify-center p-2 ml-1"
-            onClick={handleReset}
+            onClick={handleResetSizes}
           ></Button>
         </section>
       </main>
