@@ -6,7 +6,7 @@ import {
 } from "react-icons/bs";
 import { MdClear } from "react-icons/md";
 import { BiCopy } from "react-icons/bi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Spin, Select, Button } from "antd";
 import CopyToClipboard from "react-copy-to-clipboard";
 import "simplebar-react/dist/simplebar.min.css";
@@ -15,289 +15,46 @@ import SimpleBarReact from "simplebar-react";
 const { Option } = Select;
 
 export default function Home() {
-  const data = [
-    {
-      id: 0,
-      sku: "GX6947",
-      name: "adidas Adilette Slide Carbon Aluminium",
-      size: "38",
-      product_url:
-        "https://restocks.net/nl/p/adidas-adilette-slides-carbon-aluminium",
-      image_url:
-        "https://media.restocks.net/products/GX6947/adidas-adilette-slides-carbon-aluminium-1-400.png",
-      alt: "adidas-adilette-slides-carbon-aluminium",
-    },
-    {
-      id: 1,
-      sku: "DH6927-111",
-      name: "Air Jordan 4 Retro Military Black",
-      size: "42",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-military-black",
-      image_url:
-        "https://media.restocks.net/products/DH6927-111/air-jordan-4-retro-military-black-1-400.png",
-      alt: "air-jordan-4-retro-military-black",
-    },
-    {
-      id: 2,
-      sku: "DH6927-140",
-      name: "Air Jordan 4 Retro White Midnight Navy",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-white-midnight-navy",
-      image_url:
-        "https://media.restocks.net/products/DH6927-140/air-jordan-4-retro-white-midnight-navy-1-400.png",
-      alt: "air-jordan-4-retro-white-midnight-navy",
-    },
-    {
-      id: 3,
-      sku: "553558-615",
-      name: "Air Jordan 1 Low Bordeaux",
-      size: "41",
-      product_url: "https://restocks.net/nl/p/air-jordan-1-low-bordeaux",
-      image_url:
-        "https://media.restocks.net/products/553558-615/air-jordan-1-low-bordeaux-1-400.png",
-      alt: "air-jordan-1-low-bordeaux",
-    },
-    {
-      id: 4,
-      sku: "DC0774-114",
-      name: "Air Jordan 1 Low Marina Blue (W)",
-      size: "36,5",
-      product_url: "https://restocks.net/nl/p/air-jordan-1-low-marina-blue-w",
-      image_url:
-        "https://media.restocks.net/products/DC0774-114/air-jordan-1-low-marina-blue-w-1-400.png",
-      alt: "air-jordan-1-low-marina-blue-w",
-    },
-    {
-      id: 5,
-      sku: "555088-711",
-      name: "Air Jordan 1 Retro High OG Yellow Toe",
-      size: "40",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-1-retro-high-og-yellow-toe",
-      image_url:
-        "https://media.restocks.net/products/555088-711/air-jordan-1-retro-high-og-yellow-toe-1-400.png",
-      alt: "air-jordan-1-retro-high-og-yellow-toe",
-    },
-    {
-      id: 6,
-      sku: "555088-711",
-      name: "Air Jordan 1 Retro High OG Yellow Toe",
-      size: "40,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-1-retro-high-og-yellow-toe",
-      image_url:
-        "https://media.restocks.net/products/555088-711/air-jordan-1-retro-high-og-yellow-toe-1-400.png",
-      alt: "air-jordan-1-retro-high-og-yellow-toe",
-    },
-    {
-      id: 7,
-      sku: "555088-711",
-      name: "Air Jordan 1 Retro High OG Yellow Toe",
-      size: "40,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-1-retro-high-og-yellow-toe",
-      image_url:
-        "https://media.restocks.net/products/555088-711/air-jordan-1-retro-high-og-yellow-toe-1-400.png",
-      alt: "air-jordan-1-retro-high-og-yellow-toe",
-    },
-    {
-      id: 10,
-      sku: "555088-711",
-      name: "Air Jordan 1 Retro High OG Yellow Toe",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-1-retro-high-og-yellow-toe",
-      image_url:
-        "https://media.restocks.net/products/555088-711/air-jordan-1-retro-high-og-yellow-toe-1-400.png",
-      alt: "air-jordan-1-retro-high-og-yellow-toe",
-    },
-    {
-      id: 11,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 12,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 13,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 14,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 15,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 16,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 17,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 18,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 19,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 20,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 21,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 22,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 23,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-    {
-      id: 24,
-      sku: "DH7138-006",
-      name: "Jordan 4 Retro SE Black Canvas",
-      size: "42,5",
-      product_url:
-        "https://restocks.net/nl/p/air-jordan-4-retro-se-black-canvas",
-      image_url:
-        "https://media.restocks.net/products/DH7138-006/air-jordan-4-retro-se-black-canvas-1-400.png",
-      alt: "air-jordan-4-retro-se-black-canvas",
-    },
-  ];
+  const [products, setProducts] = useState([]);
 
-  //Count quantity of products
-  const productMap = data.reduce((acc, product) => {
-    const key = `${product.sku}_${product.size}`;
-    acc[key] = acc[key] ? acc[key] + 1 : 1;
-    return acc;
-  }, {});
-  //Add quantity to products
-  const filteredProducts = data.map((product) => {
-    const key = `${product.sku}_${product.size}`;
-    return {
-      ...product,
-      quantity: productMap[key],
-    };
-  });
-  //Filter out duplicates
-  const filteredItems = filteredProducts.filter((item, index, self) => {
-    return (
-      self.findIndex((t) => t.sku === item.sku && t.size === item.size) ===
-      index
-    );
-  });
-  //Sort products by size
-  filteredItems.sort((a, b) => {
-    const sizeA = parseFloat(a.size.replace(",", "."));
-    const sizeB = parseFloat(b.size.replace(",", "."));
-    return sizeA - sizeB;
-  });
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch("http://localhost:3000/product/all");
+      const products = await res.json();
+      //Count quantity of products
+      const productMap = products.reduce((acc, product) => {
+        const key = `${product.sku}_${product.size}`;
+        acc[key] = acc[key] ? acc[key] + 1 : 1;
+        return acc;
+      }, {});
+      //Add quantity to products
+      const filteredProducts = products.map((product) => {
+        const key = `${product.sku}_${product.size}`;
+        return {
+          ...product,
+          quantity: productMap[key],
+        };
+      });
+      //Filter out duplicates
+      const filteredItems = filteredProducts.filter((item, index, self) => {
+        return (
+          self.findIndex((t) => t.sku === item.sku && t.size === item.size) ===
+          index
+        );
+      });
+      //Sort products by size
+      filteredItems.sort((a, b) => {
+        const sizeA = parseFloat(a.size.replace(",", "."));
+        const sizeB = parseFloat(b.size.replace(",", "."));
+        return sizeA - sizeB;
+      });
+      setProducts(filteredItems);
+      console.log(filteredItems);
+    }
+    fetchData();
+  }, []);
 
-  const [products] = useState(filteredItems);
+  // const [products] = useState(filteredItems);
   const [showQuantity] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -378,7 +135,7 @@ export default function Home() {
               )
               .map((product) => (
                 <div
-                  key={product.id}
+                  key={product._id}
                   className="group relative text-xs md:text-sm lg:text-lg cursor-pointer rounded-xl hover:bg-gray-100 hover:shadow-inner hover:delay-75 dark:hover:bg-gray-500  w-1/3 md:w-1/4 lg:w-1/6"
                 >
                   <img
