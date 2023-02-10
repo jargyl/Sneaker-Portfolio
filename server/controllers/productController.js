@@ -24,3 +24,16 @@ module.exports.addProduct = async function (req, res, next) {
     next(err);
   }
 };
+
+module.exports.deleteProduct = async function (req, res, next) {
+  try {
+    const status = 200;
+    const productId = req.params.id;
+    const deletedProduct = await productService.deleteProduct(productId);
+    res.status(status).json(deletedProduct);
+    console.log("Product deleted");
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
+};

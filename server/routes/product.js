@@ -17,4 +17,11 @@ router.post(
   productController.addProduct
 );
 
+router.delete(
+  "/:id",
+  authenticate,
+  authorize({ role: "admin" }, { role: "user", owner: true }),
+  productController.deleteProduct
+);
+
 module.exports = router;

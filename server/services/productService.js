@@ -17,3 +17,8 @@ module.exports.addProduct = async function (product) {
   });
   return await newProduct.save();
 };
+
+module.exports.deleteProduct = async function (productId) {
+  console.log("Deleting product");
+  return await Product.findByIdAndDelete(productId);
+};
