@@ -54,7 +54,6 @@ export default function Home() {
     fetchData();
   }, []);
 
-  // const [products] = useState(filteredItems);
   const [showQuantity] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(true);
