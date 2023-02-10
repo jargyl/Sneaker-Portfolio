@@ -9,7 +9,7 @@ module.exports.login = async function (req, res, next) {
     const username = req.body.username;
     const password = req.body.password;
     let user = await userService.findUserByCredentials(username, password);
-    console.log("user: ", user);
+    if (!user) throw new Error("Invalid username or password");
     const token = jwt.sign({ _id: user._id, roles: user.roles }, SECRET, {
       expiresIn: JWT_EXPIRATION,
       algorithm: "HS256",

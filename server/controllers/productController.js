@@ -10,3 +10,17 @@ module.exports.getAllproducts = async function (req, res, next) {
     next(error);
   }
 };
+
+module.exports.addProduct = async function (req, res, next) {
+  try {
+    console.log(req.body);
+    const status = 200;
+    const product = req.body;
+    const newProduct = await productService.addProduct(product);
+    res.status(status).json(newProduct);
+    console.log("Product added");
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
+};

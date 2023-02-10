@@ -10,4 +10,11 @@ router.get(
   productController.getAllproducts
 );
 
+router.post(
+  "/add",
+  authenticate,
+  authorize({ role: "admin" }, { role: "user", owner: true }),
+  productController.addProduct
+);
+
 module.exports = router;
