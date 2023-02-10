@@ -22,3 +22,8 @@ module.exports.deleteProduct = async function (productId) {
   console.log("Deleting product");
   return await Product.findByIdAndDelete(productId);
 };
+
+module.exports.updateProduct = async function (id, updates) {
+  console.log("Updating product");
+  return await Product.findByIdAndUpdate(id, updates, { new: true });
+};

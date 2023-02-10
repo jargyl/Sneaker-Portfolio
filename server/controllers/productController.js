@@ -37,3 +37,17 @@ module.exports.deleteProduct = async function (req, res, next) {
     next(err);
   }
 };
+
+module.exports.updateProduct = async function (req, res, next) {
+  try {
+    const status = 200;
+    const id = req.params.id;
+    const updates = req.body;
+    const updatedProduct = await productService.updateProduct(id, updates);
+    res.status(status).json(updatedProduct);
+    console.log("Product updated");
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
+};
