@@ -4,8 +4,10 @@ import ProductListItem from "./ProductListItem";
 export default class ProductList extends Component {
   state = {
     products: [],
+    filteredProducts: [],
     selectedProduct: null,
     editMode: false,
+    searchText: "",
   };
 
   componentDidMount() {
@@ -16,7 +18,7 @@ export default class ProductList extends Component {
     try {
       const res = await fetch("http://localhost:3000/product/all");
       const data = await res.json();
-      this.setState({ products: data });
+      this.setState({ products: data, filteredProducts: data });
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +79,7 @@ export default class ProductList extends Component {
 
       if (res.status === 200) {
         this.fetchProducts(); // Refetch the products from the server
-        this.setState({ selectedProduct: null });
+        this.setState({ selectedProduct: null, searchText: "" });
       } else {
         throw new Error("Failed to delete product");
       }
@@ -86,8 +88,24 @@ export default class ProductList extends Component {
     }
   };
 
+  handleSearch = (e) => {
+    const searchText = e.target.value;
+    const { products } = this.state;
+    if (searchText === "") {
+      this.setState({ filteredProducts: products, searchText: "" });
+    } else {
+      const filteredProducts = products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          product.sku.toLowerCase().includes(searchText.toLowerCase())
+      );
+      this.setState({ filteredProducts, searchText });
+    }
+  };
+
   render() {
-    const { products, selectedProduct, editMode } = this.state;
+    const { selectedProduct, editMode, searchText, filteredProducts } =
+      this.state;
     return (
       <div>
         {selectedProduct && editMode ? (
@@ -133,20 +151,37 @@ export default class ProductList extends Component {
               <input type="text" id="alt" defaultValue={selectedProduct.alt} />
             </div>
             <button type="submit">Update</button>
+            <button
+              onClick={() => this.handleDeleteProduct(selectedProduct._id)}
+            >
+              Delete
+            </button>
             <button type="button" onClick={this.handleCancelClick}>
               Cancel
             </button>
           </form>
         ) : (
-          <ul>
-            {products.map((product) => (
-              <ProductListItem
-                key={product.id}
-                product={product}
-                onSelect={this.handleEditClick}
+          <>
+            <div>
+              <label htmlFor="search">Search: </label>
+              <input
+                id="search"
+                type="text"
+                value={searchText}
+                onChange={this.handleSearch}
               />
-            ))}
-          </ul>
+              <button onClick={this.handleSearchClick}>Search</button>
+            </div>
+            <ul>
+              {filteredProducts.map((product) => (
+                <ProductListItem
+                  key={product.id}
+                  product={product}
+                  onSelect={this.handleEditClick}
+                />
+              ))}
+            </ul>
+          </>
         )}
       </div>
     );
