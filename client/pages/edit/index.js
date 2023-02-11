@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
+import AddProduct from "@/components/addProduct";
 
 export default function Edit() {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,6 +22,7 @@ export default function Edit() {
     <div>
       <h1>Edit Page</h1>
       <p>This page is protected and can only be accessed when logged in</p>
+      <AddProduct />
     </div>
   );
 }
