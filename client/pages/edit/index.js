@@ -1,28 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Router from "next/router";
-import AddProduct from "@/components/addProduct";
-
-export default function Edit() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      Router.push("/login");
-    } else {
-      setIsLoading(false);
-    }
-  }, []);
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
+import React from "react";
+import { withAuth } from "../../hoc/withAuth";
+import AddProduct from "../../components/addProduct";
+function index() {
   return (
     <div>
-      <h1>Edit Page</h1>
-      <p>This page is protected and can only be accessed when logged in</p>
       <AddProduct />
     </div>
   );
 }
+
+export default withAuth(index);
