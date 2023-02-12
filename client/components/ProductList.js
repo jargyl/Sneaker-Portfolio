@@ -5,11 +5,9 @@ export default class ProductList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: props.products,
       filteredProducts: [],
       selectedProduct: null,
       editMode: false,
-      searchText: "",
     };
   }
 
@@ -52,6 +50,7 @@ export default class ProductList extends Component {
           editMode: false,
           selectedProduct: null,
         });
+        e.target.reset();
       } else {
         throw new Error("Failed to delete product");
       }
@@ -85,26 +84,22 @@ export default class ProductList extends Component {
       console.error(error);
     }
   };
-
-  handleSearch = (e) => {
-    const searchText = e.target.value;
-    const { products } = this.state;
-    if (searchText === "") {
-      this.setState({ filteredProducts: products, searchText: "" });
-    } else {
-      const filteredProducts = products.filter(
-        (product) =>
-          product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-          product.sku.toLowerCase().includes(searchText.toLowerCase())
-      );
-      this.setState({ filteredProducts, searchText });
-    }
+  handleSearchInput = (event) => {
+    this.setState({ searchQuery: event.target.value });
   };
 
   render() {
-    const { selectedProduct, editMode, searchText, filteredProducts } =
-      this.state;
+    const { selectedProduct, editMode, searchQuery } = this.state;
     const { products } = this.props;
+    let filteredProducts = products;
+    if (searchQuery) {
+      filteredProducts = products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          product.sku.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
     return (
       <div>
         {selectedProduct && editMode ? (
@@ -163,19 +158,12 @@ export default class ProductList extends Component {
         ) : (
           <>
             <div>
-              <label htmlFor="search">Search: </label>
-              <input
-                id="search"
-                type="text"
-                value={searchText}
-                onChange={this.handleSearch}
-              />
-              <button onClick={this.handleSearchClick}>Search</button>
+              <input type="text" onChange={this.handleSearchInput} />
             </div>
             <ul>
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <ProductListItem
-                  key={product.id}
+                  key={product._id}
                   product={product}
                   onSelect={this.handleEditClick}
                 />
