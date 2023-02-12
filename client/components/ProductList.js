@@ -2,27 +2,16 @@ import React, { Component } from "react";
 import ProductListItem from "./ProductListItem";
 
 export default class ProductList extends Component {
-  state = {
-    products: [],
-    filteredProducts: [],
-    selectedProduct: null,
-    editMode: false,
-    searchText: "",
-  };
-
-  componentDidMount() {
-    this.fetchProducts();
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: props.products,
+      filteredProducts: [],
+      selectedProduct: null,
+      editMode: false,
+      searchText: "",
+    };
   }
-
-  fetchProducts = async () => {
-    try {
-      const res = await fetch("http://localhost:3000/product/all");
-      const data = await res.json();
-      this.setState({ products: data, filteredProducts: data });
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   handleEditClick = (product) => {
     this.setState({ selectedProduct: product, editMode: true });
@@ -57,8 +46,12 @@ export default class ProductList extends Component {
         }
       );
       if (res.status === 200) {
-        this.fetchProducts(); // Refetch the products from the server
-        this.setState({ selectedProduct: null });
+        this.props.onProductChanged(); // Refetch the products from the server
+        this.setState({
+          selectedProduct: null,
+          editMode: false,
+          selectedProduct: null,
+        });
       } else {
         throw new Error("Failed to delete product");
       }
@@ -78,8 +71,13 @@ export default class ProductList extends Component {
       });
 
       if (res.status === 200) {
-        this.fetchProducts(); // Refetch the products from the server
-        this.setState({ selectedProduct: null, searchText: "" });
+        console.log("Product deleted");
+        this.props.onProductChanged(); // Refetch the products from the server
+        this.setState({
+          selectedProduct: null,
+          searchText: "",
+          editMode: false,
+        });
       } else {
         throw new Error("Failed to delete product");
       }
@@ -106,6 +104,7 @@ export default class ProductList extends Component {
   render() {
     const { selectedProduct, editMode, searchText, filteredProducts } =
       this.state;
+    const { products } = this.props;
     return (
       <div>
         {selectedProduct && editMode ? (
@@ -152,6 +151,7 @@ export default class ProductList extends Component {
             </div>
             <button type="submit">Update</button>
             <button
+              type="button"
               onClick={() => this.handleDeleteProduct(selectedProduct._id)}
             >
               Delete
@@ -173,7 +173,7 @@ export default class ProductList extends Component {
               <button onClick={this.handleSearchClick}>Search</button>
             </div>
             <ul>
-              {filteredProducts.map((product) => (
+              {products.map((product) => (
                 <ProductListItem
                   key={product.id}
                   product={product}

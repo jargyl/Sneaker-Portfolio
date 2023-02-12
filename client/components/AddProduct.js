@@ -25,10 +25,11 @@ export default class AddProduct extends Component {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(this.state),
-      });
-
-      const data = await res.json();
-      console.log(data);
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          this.props.onAddProduct(data);
+        });
     } catch (error) {
       console.error(error);
     }
