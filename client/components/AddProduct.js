@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 
 export default class AddProduct extends Component {
-  state = {
-    sku: "",
-    name: "",
-    size: "",
-    product_url: "",
-    image_url: "",
-    alt: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      sku: "",
+      name: "",
+      size: "",
+      product_url: "",
+      image_url: "",
+      alt: "",
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -29,6 +33,14 @@ export default class AddProduct extends Component {
         .then((res) => res.json())
         .then((data) => {
           this.props.onAddProduct(data);
+          this.setState({
+            sku: "",
+            name: "",
+            size: "",
+            product_url: "",
+            image_url: "",
+            alt: "",
+          });
         });
     } catch (error) {
       console.error(error);

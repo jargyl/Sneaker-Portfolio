@@ -50,7 +50,6 @@ export default class ProductList extends Component {
           editMode: false,
           selectedProduct: null,
         });
-        e.target.reset();
       } else {
         throw new Error("Failed to delete product");
       }
