@@ -106,7 +106,7 @@ export default function Home() {
             <div className="flex items-center gap-1 select-none cursor-pointer">
               <h1 className="text-2xl md:text-4xl font-[600]">Bottled Kicks</h1>
               <img
-                src="/bottledkicks.png"
+                src="/bottledkicks_400.png"
                 alt="trainers"
                 className="h-12 md:h-16"
               />
@@ -138,7 +138,7 @@ export default function Home() {
                   className="group relative text-xs md:text-sm lg:text-lg cursor-pointer rounded-xl hover:bg-gray-100 hover:shadow-inner hover:delay-75 dark:hover:bg-gray-500  w-1/3 md:w-1/4 lg:w-1/6"
                 >
                   <img
-                    src={`https://images.weserv.nl/?url=${product.image_url}?fit=fill&w=300&h=214&fm=webp&auto=compress&trim=color&q=90&dpr=2`}
+                    src={`https://images.weserv.nl/?url=${product.image_url}?fit=fill&w=200&h=114&fm=webp&auto=compress&trim=color&q=90&dpr=2`}
                     alt={`${product.alt}`}
                     onClick={() => handleModalOpen(product)}
                     className="max-h-full max-w-full rounded-t-xl"

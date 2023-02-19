@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withAuth } from "../../hoc/withAuth";
-import AddProduct from "../../components/addProduct";
+import AddProduct from "../../components/AddProduct";
 import { useRouter } from "next/router";
 import ProductList from "@/components/ProductList";
 function index() {
@@ -27,10 +27,10 @@ function index() {
   }, []);
 
   return (
-    <div>
+    <div className="font-mandali">
       <AddProduct onAddProduct={fetchProducts} />
-      <ProductList products={products} onProductChanged={fetchProducts} />
-      <button onClick={handleLogout}>Logout</button>
+      {/* <ProductList products={products} onProductChanged={fetchProducts} /> */}
+      {/* <button onClick={handleLogout}>Logout</button> */}
     </div>
   );
 }
