@@ -11,6 +11,7 @@ const validateMessages = {
 export default class AddProduct extends Component {
   constructor(props) {
     super(props);
+    this.formRef = React.createRef();
     this.state = {
       sku: "",
       name: "",
@@ -27,15 +28,25 @@ export default class AddProduct extends Component {
   };
 
   handleSubmit = async (e) => {
+    const sku = this.state.sku.toUpperCase();
+    const alt = this.state.product_url.split("/").pop();
+    const image_url = `https://cdn.restocks.net/cdn-cgi/image/width=400/storage/images/products/${sku}/1.png`;
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:3000/product/add", {
+      await fetch("http://localhost:3000/product/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(this.state),
+        body: JSON.stringify({
+          sku: sku,
+          name: this.state.name,
+          size: this.state.size,
+          product_url: this.state.product_url,
+          image_url: image_url,
+          alt: alt,
+        }),
       })
         .then((res) => {
           if (res.status === 200) {
@@ -47,14 +58,19 @@ export default class AddProduct extends Component {
         })
         .then((data) => {
           this.props.onAddProduct(data);
-          this.setState({
-            sku: "",
-            name: "",
-            size: "",
-            product_url: "",
-            image_url: "",
-            alt: "",
-          });
+          this.setState(
+            {
+              sku: "",
+              name: "",
+              size: "",
+              product_url: "",
+              image_url: "",
+              alt: "",
+            },
+            () => {
+              this.formRef.current.resetFields();
+            }
+          );
         });
     } catch (error) {
       console.error(error);
@@ -64,6 +80,7 @@ export default class AddProduct extends Component {
   render() {
     return (
       <Form
+        ref={this.formRef}
         name="addProduct"
         initialValues={this.state}
         onValuesChange={(_, values) => this.setState(values)}
@@ -136,37 +153,6 @@ export default class AddProduct extends Component {
           <Input
             placeholder="https://restocks.net/nl/p/nike-dunk-low-retro-white-black-2021"
             value={this.state.product_url}
-            onChange={this.handleChange}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Image URL"
-          name="image_url"
-          rules={[
-            {
-              required: true,
-              type: "url",
-            },
-          ]}
-        >
-          <Input
-            placeholder="https://cdn.restocks.net/cdn-cgi/image/width=400/storage/images/products/DD1391-100/1.png"
-            value={this.state.image_url}
-            onChange={this.handleChange}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Alt"
-          name="alt"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input
-            placeholder="nike-dunk-low-retro-white-black-2021"
-            value={this.state.alt}
             onChange={this.handleChange}
           />
         </Form.Item>
