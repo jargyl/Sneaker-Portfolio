@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import ProductListItem from "./ProductListItem";
+import { Input } from "antd";
+import "simplebar-react/dist/simplebar.min.css";
+import SimpleBarReact from "simplebar-react";
 
 export default class ProductList extends Component {
   constructor(props) {
@@ -156,10 +159,14 @@ export default class ProductList extends Component {
           </form>
         ) : (
           <>
-            <div>
-              <input type="text" onChange={this.handleSearchInput} />
+            <div className="bg-slate-100">
+              <Input.Search
+                placeholder="Enter search text"
+                onChange={this.handleSearchInput}
+                allowClear={true}
+              />
             </div>
-            <ul>
+            <SimpleBarReact className="bg-slate-100 ">
               {filteredProducts.map((product) => (
                 <ProductListItem
                   key={product._id}
@@ -167,7 +174,7 @@ export default class ProductList extends Component {
                   onSelect={this.handleEditClick}
                 />
               ))}
-            </ul>
+            </SimpleBarReact>
           </>
         )}
       </div>

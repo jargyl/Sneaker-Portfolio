@@ -28,7 +28,7 @@ function index() {
 
   return (
     <div className="font-mandali">
-      <AddProduct onAddProduct={fetchProducts} />
+      {/* <AddProduct onAddProduct={fetchProducts} /> */}
       <ProductList products={products} onProductChanged={fetchProducts} />
       {/* <button onClick={handleLogout}>Logout</button> */}
     </div>
