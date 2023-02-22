@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ProductListItem from "./ProductListItem";
-import { Input } from "antd";
+import { Button, Form, Input, message, Modal } from "antd";
 import "simplebar-react/dist/simplebar.min.css";
 import SimpleBarReact from "simplebar-react";
 
@@ -23,9 +23,6 @@ export default class ProductList extends Component {
   };
 
   handleFormSubmit = async (e) => {
-    e.preventDefault();
-    const { id, name, sku, size, product_url, image_url, alt } =
-      e.target.elements;
     const token = localStorage.getItem("token");
     try {
       const res = await fetch(
@@ -37,12 +34,12 @@ export default class ProductList extends Component {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: name.value,
-            sku: sku.value,
-            size: size.value,
-            product_url: product_url.value,
-            image_url: image_url.value,
-            alt: alt.value,
+            name: this.state.selectedProduct.name,
+            sku: this.state.selectedProduct.sku,
+            size: this.state.selectedProduct.size,
+            product_url: this.state.selectedProduct.product_url,
+            image_url: this.state.selectedProduct.image_url,
+            alt: this.state.selectedProduct.alt,
           }),
         }
       );
@@ -53,8 +50,9 @@ export default class ProductList extends Component {
           editMode: false,
           selectedProduct: null,
         });
+        message.success("Product updated successfully");
       } else {
-        throw new Error("Failed to delete product");
+        message.error("Failed to update product");
       }
     } catch (error) {
       console.error(error);
@@ -79,8 +77,9 @@ export default class ProductList extends Component {
           searchText: "",
           editMode: false,
         });
+        message.success("Product deleted successfully");
       } else {
-        throw new Error("Failed to delete product");
+        message.error("Failed to delete product");
       }
     } catch (error) {
       console.error(error);
@@ -104,79 +103,87 @@ export default class ProductList extends Component {
 
     return (
       <div>
-        {selectedProduct && editMode ? (
-          <form onSubmit={this.handleFormSubmit}>
-            <div>
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                id="name"
-                defaultValue={selectedProduct.name}
-              />
-            </div>
-            <div>
-              <label htmlFor="sku">SKU:</label>
-              <input type="text" id="sku" defaultValue={selectedProduct.sku} />
-            </div>
-            <div>
-              <label htmlFor="size">Size:</label>
-              <input
-                type="text"
-                id="size"
-                defaultValue={selectedProduct.size}
-              />
-            </div>
-            <div>
-              <label htmlFor="product_url">Product URL:</label>
-              <input
-                type="text"
-                id="product_url"
-                defaultValue={selectedProduct.product_url}
-              />
-            </div>
-            <div>
-              <label htmlFor="image_url">Image URL:</label>
-              <input
-                type="text"
-                id="image_url"
-                defaultValue={selectedProduct.image_url}
-              />
-            </div>
-            <div>
-              <label htmlFor="alt">Alt:</label>
-              <input type="text" id="alt" defaultValue={selectedProduct.alt} />
-            </div>
-            <button type="submit">Update</button>
-            <button
-              type="button"
-              onClick={() => this.handleDeleteProduct(selectedProduct._id)}
+        {editMode && selectedProduct && (
+          <Modal
+            open={editMode}
+            onCancel={this.handleCancelClick}
+            footer={[
+              <Button type="text" onClick={this.handleCancelClick}>
+                Cancel
+              </Button>,
+              <Button
+                type="primary"
+                onClick={() => this.handleDeleteProduct(selectedProduct._id)}
+                danger
+              >
+                Delete
+              </Button>,
+
+              <Button type="primary" htmlType="submit" form="edit-form">
+                Update
+              </Button>,
+            ]}
+          >
+            <Form
+              initialValues={this.state.selectedProduct}
+              onValuesChange={(_, values) => {
+                const { selectedProduct } = this.state;
+                this.setState({
+                  selectedProduct: { ...selectedProduct, ...values },
+                });
+              }}
+              onFinish={this.handleFormSubmit}
+              id="edit-form"
             >
-              Delete
-            </button>
-            <button type="button" onClick={this.handleCancelClick}>
-              Cancel
-            </button>
-          </form>
-        ) : (
-          <>
-            <div className="bg-slate-100">
-              <Input.Search
-                placeholder="Enter search text"
-                onChange={this.handleSearchInput}
-                allowClear={true}
-              />
-            </div>
-            <SimpleBarReact className="bg-slate-100 ">
-              {filteredProducts.map((product) => (
-                <ProductListItem
-                  key={product._id}
-                  product={product}
-                  onSelect={this.handleEditClick}
-                />
-              ))}
-            </SimpleBarReact>
-          </>
+              <Form.Item label="Name" name="name">
+                <Input value={this.state.selectedProduct.name} />
+              </Form.Item>
+              <Form.Item
+                label="SKU"
+                name="sku"
+                style={{ display: "inline-block", width: "calc(50% - 8px)" }}
+              >
+                <Input value={this.state.selectedProduct.sku} />
+              </Form.Item>
+              <Form.Item
+                label="Size"
+                name="size"
+                style={{
+                  display: "inline-block",
+                  width: "calc(50% - 8px)",
+                  margin: "0 8px",
+                }}
+              >
+                <Input value={this.state.selectedProduct.size} />
+              </Form.Item>
+              <Form.Item label="Product URL" name="product_url">
+                <Input value={this.state.selectedProduct.product_url} />
+              </Form.Item>
+              <Form.Item label="Image URL" name="image_url">
+                <Input value={this.state.selectedProduct.image_url} />
+              </Form.Item>
+              <Form.Item label="Alt" name="alt">
+                <Input value={this.state.selectedProduct.alt} />
+              </Form.Item>
+            </Form>
+          </Modal>
         )}
+        <div className="bg-slate-100">
+          <Input.Search
+            placeholder="Enter search text"
+            onChange={this.handleSearchInput}
+            allowClear={true}
+          />
+        </div>
+        <SimpleBarReact className="bg-slate-100 ">
+          {filteredProducts.map((product) => (
+            <ProductListItem
+              key={product._id}
+              product={product}
+              onSelect={this.handleEditClick}
+            />
+          ))}
+        </SimpleBarReact>
       </div>
     );
   }
