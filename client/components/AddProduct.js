@@ -88,6 +88,7 @@ export default class AddProduct extends Component {
         validateMessages={validateMessages}
         autoComplete="off"
         requiredMark={false}
+        className="bg-slate-100 p-5 rounded-xl"
       >
         <Form.Item
           label="Name"
@@ -97,6 +98,7 @@ export default class AddProduct extends Component {
               required: true,
             },
           ]}
+          className="mb-2 md:mb-5"
         >
           <Input
             placeholder="Nike Dunk Low Retro White Black (2021)"
@@ -113,6 +115,7 @@ export default class AddProduct extends Component {
             },
           ]}
           style={{ display: "inline-block", width: "calc(50% - 8px)" }}
+          className="mb-2 md:mb-5"
         >
           <Input
             placeholder="DD1391-100"
@@ -133,6 +136,7 @@ export default class AddProduct extends Component {
             width: "calc(50% - 8px)",
             margin: "0 8px",
           }}
+          className="mb-2 md:mb-5"
         >
           <Input
             placeholder="42,5"
@@ -149,6 +153,7 @@ export default class AddProduct extends Component {
               type: "url",
             },
           ]}
+          className="md:mb-5"
         >
           <Input
             placeholder="https://restocks.net/nl/p/nike-dunk-low-retro-white-black-2021"
@@ -156,8 +161,8 @@ export default class AddProduct extends Component {
             onChange={this.handleChange}
           />
         </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
+        <Form.Item className="flex w-full justify-center mb-0 ">
+          <Button type="primary" shape="round" htmlType="submit">
             Add Product
           </Button>
         </Form.Item>

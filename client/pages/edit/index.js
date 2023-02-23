@@ -3,6 +3,11 @@ import { withAuth } from "../../hoc/withAuth";
 import AddProduct from "../../components/AddProduct";
 import { useRouter } from "next/router";
 import ProductList from "@/components/ProductList";
+import { Button, Tabs } from "antd";
+import { TbLogout } from "react-icons/tb";
+
+const { TabPane } = Tabs;
+
 function index() {
   const [products, setProducts] = useState([]);
   const router = useRouter();
@@ -27,10 +32,23 @@ function index() {
   }, []);
 
   return (
-    <div className="font-mandali">
-      {/* <AddProduct onAddProduct={fetchProducts} /> */}
-      <ProductList products={products} onProductChanged={fetchProducts} />
-      {/* <button onClick={handleLogout}>Logout</button> */}
+    <div className="font-mandali w-5/6 md:w-3/5 mr-auto ml-auto relative">
+      <Tabs>
+        <TabPane tab="Product Overview" key="1">
+          <ProductList products={products} onProductChanged={fetchProducts} />
+        </TabPane>
+        <TabPane tab="Add Product" key="2">
+          <AddProduct onAddProduct={fetchProducts} />
+        </TabPane>
+      </Tabs>
+      <Button
+        onClick={handleLogout}
+        shape="round"
+        className="absolute top-2 right-0 flex items-center"
+        type="text"
+      >
+        <TbLogout />
+      </Button>
     </div>
   );
 }

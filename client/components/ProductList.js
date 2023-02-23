@@ -108,10 +108,15 @@ export default class ProductList extends Component {
             open={editMode}
             onCancel={this.handleCancelClick}
             footer={[
-              <Button type="text" onClick={this.handleCancelClick}>
+              <Button
+                shape="round"
+                type="text"
+                onClick={this.handleCancelClick}
+              >
                 Cancel
               </Button>,
               <Button
+                shape="round"
                 type="primary"
                 onClick={() => this.handleDeleteProduct(selectedProduct._id)}
                 danger
@@ -119,7 +124,12 @@ export default class ProductList extends Component {
                 Delete
               </Button>,
 
-              <Button type="primary" htmlType="submit" form="edit-form">
+              <Button
+                shape="round"
+                type="primary"
+                htmlType="submit"
+                form="edit-form"
+              >
                 Update
               </Button>,
             ]}
@@ -168,22 +178,23 @@ export default class ProductList extends Component {
             </Form>
           </Modal>
         )}
-        <div className="bg-slate-100">
+        <div className="bg-slate-100 pt-2 p-1 md:p-2 rounded-xl">
           <Input.Search
             placeholder="Enter search text"
             onChange={this.handleSearchInput}
             allowClear={true}
+            className="pb-2"
           />
+          <SimpleBarReact className="h-[80vh] md:h-[70vh]">
+            {filteredProducts.map((product) => (
+              <ProductListItem
+                key={product._id}
+                product={product}
+                onSelect={this.handleEditClick}
+              />
+            ))}
+          </SimpleBarReact>
         </div>
-        <SimpleBarReact className="bg-slate-100 ">
-          {filteredProducts.map((product) => (
-            <ProductListItem
-              key={product._id}
-              product={product}
-              onSelect={this.handleEditClick}
-            />
-          ))}
-        </SimpleBarReact>
       </div>
     );
   }
