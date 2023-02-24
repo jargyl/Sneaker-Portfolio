@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { Button, Form, Input, InputNumber } from "antd";
+import { Button, Form, Input, InputNumber, message } from "antd";
 
 export default function Login() {
   const router = useRouter();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
+    setSubmitting(true);
     try {
       const res = await fetch("http://localhost:3000/user/login", {
         method: "POST",
@@ -20,13 +21,15 @@ export default function Login() {
       if (res.status === 200) {
         const data = await res.json();
         console.log(data);
+        setSubmitting(false);
         localStorage.setItem("token", data.token);
         router.push("/edit");
       } else {
-        console.error("Incorrect username or password");
-        setError("Incorrect username or password");
+        setSubmitting(false);
+        message.error("Invalid username or password");
       }
     } catch (error) {
+      setSubmitting(false);
       console.error(error);
     }
   };
@@ -49,12 +52,16 @@ export default function Login() {
           />
         </Form.Item>
         <Form.Item className="mb-0 flex justify-center">
-          <Button type="primary" htmlType="submit" shape="round">
+          <Button
+            type="primary"
+            htmlType="submit"
+            shape="round"
+            loading={submitting}
+          >
             Login
           </Button>
         </Form.Item>
       </Form>
-      {error && <p>{error}</p>}
     </div>
   );
 }

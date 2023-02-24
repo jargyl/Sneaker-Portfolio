@@ -26,7 +26,11 @@ export default class ProductListItem extends Component {
             <p>{product.size}</p>
           </div>
         </div>
-        <Button onClick={this.handleClick} shape="circle">
+        <Button
+          onClick={this.handleClick}
+          shape="circle"
+          className="flex items-center justify-center"
+        >
           <TbEdit />
         </Button>
       </div>

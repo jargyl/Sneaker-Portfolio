@@ -113,7 +113,7 @@ export default function Home() {
             </div>
 
             <div
-              className={`fixed right-[1%] pr-3 cursor-pointer text-lg md:text-2xl flex`}
+              className={`fixed right-[1%] pr-3 cursor-pointer text-lg flex`}
               onClick={() => setDarkMode((prev) => !prev)}
             >
               {darkMode ? (
