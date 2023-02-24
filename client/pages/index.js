@@ -138,7 +138,7 @@ export default function Home() {
                   className="group relative text-xs md:text-sm lg:text-lg cursor-pointer rounded-xl hover:bg-gray-100 hover:shadow-inner hover:delay-75 dark:hover:bg-gray-500  w-1/3 md:w-1/4 lg:w-1/6"
                 >
                   <img
-                    src={`https://images.weserv.nl/?url=${product.image_url}?fit=fill&w=200&h=114&fm=webp&auto=compress&trim=color&q=90&dpr=2`}
+                    src={`https://wsrv.nl/?url=${product.image_url}&h=100&dpr=2&l=6&output=webp`}
                     alt={`${product.alt}`}
                     onClick={() => handleModalOpen(product)}
                     className="max-h-full max-w-full rounded-t-xl"

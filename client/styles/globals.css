@@ -8,7 +8,8 @@
 }
 
 body{
-  margin:auto
+  margin:auto;
+  font-family: 'Open Sans', sans-serif;
 }
 
 
@@ -16,4 +17,5 @@ body{
 @font-face{
   font-family: 'mandali';
   src: url('../public/Mandali.ttf');
+  font-display: swap;
 }
