@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { Button, Form, Input, InputNumber } from "antd";
 
 export default function Login() {
   const router = useRouter();
@@ -9,7 +10,6 @@ export default function Login() {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     try {
       const res = await fetch("http://localhost:3000/user/login", {
         method: "POST",
@@ -32,22 +32,28 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 rounded-xl bg-slate-100 p-4">
+      <Form onFinish={handleSubmit}>
+        <Form.Item name="username">
+          <Input
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item name="password">
+          <Input.Password
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item className="mb-0 flex justify-center">
+          <Button type="primary" htmlType="submit" shape="round">
+            Login
+          </Button>
+        </Form.Item>
+      </Form>
       {error && <p>{error}</p>}
     </div>
   );
