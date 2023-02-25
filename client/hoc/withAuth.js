@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { Space, Spin } from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -9,9 +10,9 @@ export function withAuth(PageComponent) {
     useEffect(() => {
       const token = localStorage.getItem("token");
       if (!token) {
-        router.push("/login");
+        router.push("/admin");
       } else {
-        fetch("http://localhost:3000/user/verify-token", {
+        fetch(`${API_URL}/user/verify-token`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -26,7 +27,7 @@ export function withAuth(PageComponent) {
           })
           .catch((error) => {
             console.error(error);
-            router.push("/login");
+            router.push("/admin");
           });
       }
     }, []);

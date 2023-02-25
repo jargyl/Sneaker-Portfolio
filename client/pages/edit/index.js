@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import ProductList from "@/components/ProductList";
 import { Button, Tabs } from "antd";
 import { TbLogout } from "react-icons/tb";
+import { API_URL } from "@/config";
 
 const { TabPane } = Tabs;
 
@@ -18,7 +19,7 @@ function index() {
 
   async function fetchProducts() {
     try {
-      const res = await fetch("http://localhost:3000/product/all");
+      const res = await fetch(`${API_URL}/product/all`);
       const data = await res.json();
       setProducts(data);
       console.log("From index" + data);

@@ -11,6 +11,7 @@ import { Modal, Spin, Select, Button } from "antd";
 import CopyToClipboard from "react-copy-to-clipboard";
 import "simplebar-react/dist/simplebar.min.css";
 import SimpleBarReact from "simplebar-react";
+import { API_URL } from "@/config";
 
 const { Option } = Select;
 
@@ -19,7 +20,8 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("http://localhost:3000/product/all");
+      console.log(`${API_URL}/product/all`);
+      const res = await fetch(`${API_URL}/product/all`);
       const products = await res.json();
       //Count quantity of products
       const productMap = products.reduce((acc, product) => {

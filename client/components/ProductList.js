@@ -3,6 +3,7 @@ import ProductListItem from "./ProductListItem";
 import { Button, Form, Input, message, Modal } from "antd";
 import "simplebar-react/dist/simplebar.min.css";
 import SimpleBarReact from "simplebar-react";
+import { API_URL } from "@/config";
 
 export default class ProductList extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class ProductList extends Component {
       filteredProducts: [],
       selectedProduct: null,
       editMode: false,
+      showConfirmation: false,
     };
   }
 
@@ -26,7 +28,7 @@ export default class ProductList extends Component {
     const token = localStorage.getItem("token");
     try {
       const res = await fetch(
-        `http://localhost:3000/product/${this.state.selectedProduct._id}/update`,
+        `${API_URL}/product/${this.state.selectedProduct._id}/update`,
         {
           method: "PUT",
           headers: {
@@ -59,9 +61,14 @@ export default class ProductList extends Component {
     }
   };
 
+  handleDeleteButton = () => {
+    this.setState({ showConfirmation: true });
+  };
+
   handleDeleteProduct = async (id) => {
+    this.setState({ showConfirmation: false });
     try {
-      const res = await fetch(`http://localhost:3000/product/${id}`, {
+      const res = await fetch(`${API_URL}/product/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +125,7 @@ export default class ProductList extends Component {
               <Button
                 shape="round"
                 type="primary"
-                onClick={() => this.handleDeleteProduct(selectedProduct._id)}
+                onClick={this.handleDeleteButton}
                 danger
               >
                 Delete
@@ -176,6 +183,21 @@ export default class ProductList extends Component {
                 <Input value={this.state.selectedProduct.alt} />
               </Form.Item>
             </Form>
+            <Modal
+              title="Confirm Delete"
+              open={this.state.showConfirmation}
+              onOk={() => {
+                this.handleDeleteProduct(selectedProduct._id);
+                this.setState({ showConfirmation: false });
+              }}
+              onCancel={() => this.setState({ showConfirmation: false })}
+              width={350}
+              className="mt-20"
+              okButtonProps={{ danger: true, shape: "round" }}
+              cancelButtonProps={{ shape: "round" }}
+            >
+              <p>Are you sure you want to delete this item?</p>
+            </Modal>
           </Modal>
         )}
         <div className="bg-slate-100 pt-2 p-1 md:p-2 rounded-xl">

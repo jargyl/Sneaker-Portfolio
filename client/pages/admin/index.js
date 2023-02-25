@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { Button, Form, Input, InputNumber, message } from "antd";
+import { API_URL } from "@/config";
 
 export default function Login() {
   const router = useRouter();
@@ -12,7 +13,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     setSubmitting(true);
     try {
-      const res = await fetch("http://localhost:3000/user/login", {
+      const res = await fetch(`${API_URL}/user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
