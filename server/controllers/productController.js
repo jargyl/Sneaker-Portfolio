@@ -51,3 +51,16 @@ module.exports.updateProduct = async function (req, res, next) {
     next(err);
   }
 };
+
+module.exports.scrapeProductData = async function (req, res, next) {
+  try {
+    const status = 200;
+    const size = req.body.size;
+    const sku = req.body.sku;
+    const scrapedProduct = await productService.scrapeProductData(size, sku);
+    res.status(status).json(scrapedProduct);
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
+};

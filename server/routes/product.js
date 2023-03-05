@@ -26,4 +26,11 @@ router.put(
   productController.updateProduct
 );
 
+router.post(
+  "/scrape",
+  authenticate,
+  authorize({ role: "admin" }, { role: "user", owner: true }),
+  productController.scrapeProductData
+);
+
 module.exports = router;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input, message, Select } from "antd";
 import { API_URL } from "../config";
 
 const validateMessages = {
@@ -20,6 +20,7 @@ export default class AddProduct extends Component {
       product_url: "",
       image_url: "",
       alt: "",
+      submitting: false,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -29,6 +30,7 @@ export default class AddProduct extends Component {
   };
 
   handleSubmit = async (e) => {
+    this.setState({ submitting: true });
     const sku = this.state.sku.toUpperCase();
     const alt = this.state.product_url.split("/").pop();
     const image_url = `https://cdn.restocks.net/cdn-cgi/image/width=400/storage/images/products/${sku}/1.png`;
@@ -55,6 +57,8 @@ export default class AddProduct extends Component {
           } else {
             message.error("Failed to add product");
           }
+          this.setState({ submitting: false });
+
           return res.json();
         })
         .then((data) => {
