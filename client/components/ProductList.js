@@ -80,7 +80,6 @@ export default class ProductList extends Component {
       });
 
       if (res.status === 200) {
-        console.log("Product deleted");
         this.props.onProductChanged(); // Refetch the products from the server
         this.setState({
           selectedProduct: null,

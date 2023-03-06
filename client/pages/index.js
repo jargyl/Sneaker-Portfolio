@@ -49,7 +49,6 @@ export default function Home() {
         return sizeA - sizeB;
       });
       setProducts(filteredItems);
-      console.log(filteredItems);
     }
     fetchData();
   }, []);

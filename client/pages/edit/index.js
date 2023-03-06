@@ -24,7 +24,6 @@ function Edit() {
       const res = await fetch(`${process.env.API_URL}/product/all`);
       const data = await res.json();
       setProducts(data);
-      console.log("From index" + data);
     } catch (error) {
       console.error(error);
     }

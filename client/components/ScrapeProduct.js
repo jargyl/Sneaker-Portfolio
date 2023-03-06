@@ -11,7 +11,7 @@ export default class ScrapeProduct extends Component {
     try {
       const { sku, size } = values;
       this.setState({ loading: true });
-      const res = await fetch(`${API_URL}/product/scrape`, {
+      const res = await fetch(`${process.env.API_URL}/product/scrape`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

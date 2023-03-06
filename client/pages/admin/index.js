@@ -21,7 +21,6 @@ export default function Login() {
 
       if (res.status === 200) {
         const data = await res.json();
-        console.log(data);
         setSubmitting(false);
         localStorage.setItem("token", data.token);
         router.push("/edit");
