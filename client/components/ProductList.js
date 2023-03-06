@@ -23,6 +23,14 @@ export default class ProductList extends Component {
     this.setState({ selectedProduct: null, editMode: false });
   };
 
+  handleDeleteButton = () => {
+    this.setState({ showConfirmation: true });
+  };
+
+  handleSearchInput = (event) => {
+    this.setState({ searchQuery: event.target.value });
+  };
+
   handleFormSubmit = async (e) => {
     const token = localStorage.getItem("token");
     try {
@@ -60,10 +68,6 @@ export default class ProductList extends Component {
     }
   };
 
-  handleDeleteButton = () => {
-    this.setState({ showConfirmation: true });
-  };
-
   handleDeleteProduct = async (id) => {
     this.setState({ showConfirmation: false });
     try {
@@ -91,9 +95,6 @@ export default class ProductList extends Component {
       console.error(error);
     }
   };
-  handleSearchInput = (event) => {
-    this.setState({ searchQuery: event.target.value });
-  };
 
   render() {
     const { selectedProduct, editMode, searchQuery } = this.state;
@@ -106,7 +107,6 @@ export default class ProductList extends Component {
           product.sku.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-
     return (
       <div>
         {editMode && selectedProduct && (
