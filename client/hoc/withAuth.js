@@ -1,4 +1,3 @@
-import { API_URL } from "@/config";
 import { Space, Spin } from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -12,7 +11,7 @@ export function withAuth(PageComponent) {
       if (!token) {
         router.push("/admin");
       } else {
-        fetch(`${API_URL}/user/verify-token`, {
+        fetch(`${process.env.API_URL}/user/verify-token`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

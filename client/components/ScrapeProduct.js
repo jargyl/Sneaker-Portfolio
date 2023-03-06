@@ -1,6 +1,5 @@
 import { Button, Form, Input, message, Select } from "antd";
 import React, { Component } from "react";
-import { API_URL } from "../config";
 
 export default class ScrapeProduct extends Component {
   formRef = React.createRef();

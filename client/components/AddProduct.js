@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Input, message, Select } from "antd";
-import { API_URL } from "../config";
+import { Button, Form, Input, message } from "antd";
 
 const validateMessages = {
   required: "Please fill in all required fields",
@@ -36,7 +35,7 @@ export default class AddProduct extends Component {
     const image_url = `https://cdn.restocks.net/cdn-cgi/image/width=400/storage/images/products/${sku}/1.png`;
     try {
       const token = localStorage.getItem("token");
-      await fetch(`${API_URL}/product/add`, {
+      await fetch(`${process.env.API_URL}/product/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

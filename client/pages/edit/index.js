@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 import ProductList from "@/components/ProductList";
 import { Button, Tabs, Tooltip, Icon } from "antd";
 import { TbLogout } from "react-icons/tb";
-import { API_URL } from "@/config";
 import ScrapeProduct from "@/components/ScrapeProduct";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import Head from "next/head";
 
 const { TabPane } = Tabs;
 
-function index() {
+function Edit() {
   const [products, setProducts] = useState([]);
   const router = useRouter();
   const handleLogout = () => {
@@ -21,7 +21,7 @@ function index() {
 
   async function fetchProducts() {
     try {
-      const res = await fetch(`${API_URL}/product/all`);
+      const res = await fetch(`${process.env.API_URL}/product/all`);
       const data = await res.json();
       setProducts(data);
       console.log("From index" + data);
@@ -36,6 +36,9 @@ function index() {
 
   return (
     <div className="font-mandali w-5/6 md:w-3/5 mr-auto ml-auto relative">
+      <Head>
+        <title>Edit Products</title>
+      </Head>
       <Tabs>
         <TabPane tab="Product Overview" key="1">
           <ProductList products={products} onProductChanged={fetchProducts} />
@@ -68,4 +71,4 @@ function index() {
   );
 }
 
-export default withAuth(index);
+export default withAuth(Edit);

@@ -3,7 +3,6 @@ import ProductListItem from "./ProductListItem";
 import { Button, Form, Input, message, Modal } from "antd";
 import "simplebar-react/dist/simplebar.min.css";
 import SimpleBarReact from "simplebar-react";
-import { API_URL } from "@/config";
 
 export default class ProductList extends Component {
   constructor(props) {
@@ -28,7 +27,7 @@ export default class ProductList extends Component {
     const token = localStorage.getItem("token");
     try {
       const res = await fetch(
-        `${API_URL}/product/${this.state.selectedProduct._id}/update`,
+        `${process.env.API_URL}/product/${this.state.selectedProduct._id}/update`,
         {
           method: "PUT",
           headers: {
@@ -68,7 +67,7 @@ export default class ProductList extends Component {
   handleDeleteProduct = async (id) => {
     this.setState({ showConfirmation: false });
     try {
-      const res = await fetch(`${API_URL}/product/${id}`, {
+      const res = await fetch(`${process.env.API_URL}/product/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -119,6 +118,7 @@ export default class ProductList extends Component {
                 shape="round"
                 type="text"
                 onClick={this.handleCancelClick}
+                key="cancel"
               >
                 Cancel
               </Button>,
@@ -127,6 +127,7 @@ export default class ProductList extends Component {
                 type="primary"
                 onClick={this.handleDeleteButton}
                 danger
+                key="delete"
               >
                 Delete
               </Button>,
@@ -136,6 +137,7 @@ export default class ProductList extends Component {
                 type="primary"
                 htmlType="submit"
                 form="edit-form"
+                key="update"
               >
                 Update
               </Button>,
