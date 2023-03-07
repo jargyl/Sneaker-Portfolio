@@ -49,3 +49,5 @@ function cleanup(event) {
   mongoose.connection.close();
   process.exit();
 }
+
+module.exports = app;
