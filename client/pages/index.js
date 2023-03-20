@@ -59,6 +59,11 @@ export default function Home() {
   const [copied, setCopied] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedSizes, setSelectedSizes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
 
   const handleSizeChange = (sizes) => {
     setSelectedSizes(sizes);
@@ -123,6 +128,12 @@ export default function Home() {
         </section>
 
         <SimpleBarReact className="flex-1 md:mx-12 pb-16 pt-5 h-0">
+          {isLoading && (
+            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <Spin size="large" />
+            </div>
+          )}
+
           <div className="flex justify-center flex-wrap ">
             {products
               .filter(
@@ -139,6 +150,7 @@ export default function Home() {
                     alt={`${product.alt}`}
                     onClick={() => handleModalOpen(product)}
                     className="max-h-full max-w-full rounded-t-xl"
+                    onLoad={handleImageLoad}
                   />
 
                   <p className="leading-1 md:leading-normal mx-1">
