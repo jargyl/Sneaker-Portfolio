@@ -1,6 +1,26 @@
 # Bottled Kicks
 
-Bottled Kicks is a web application that displays a collection of sneakers in a portfolio format. The application uses a Next.js frontend and a Node.js backend with MongoDB as the database. Users can create their own MongoDB and fill in the connection string in the `.env` file to make the backend work.
+Bottled Kicks is a web application that allows users to showcase and manage their sneaker collection. The application is built using Next.js for the frontend and Node.js for the backend, with MongoDB as the database. Users can easily create their own MongoDB instance and configure the connection string in the .env file to enable the backend functionality.
+
+The homepage of the application features an overview of the user's sneaker collection, which can be filtered by size. Users can also enable dark mode for a more visually appealing experience. Clicking on a sneaker will open a popup window containing additional information about the sneaker, such as its SKU. Users can also copy the name, SKU, and size of the sneaker using the copy icon button.
+
+The admin page is only accessible to authorized users, and allows them to edit existing sneakers or add new ones. Sneakers can be added manually by entering all relevant information, or by using the scraper feature to automatically gather data from the sneaker reselling platform Restocks.net using only the SKU and size information.
+
+The application's backend and frontend are both hosted on Vercel, while the database is hosted on MongoDB. With its user-friendly interface, customizable features, and seamless integration with MongoDB and Vercel, Bottled Kicks is the perfect solution for sneaker enthusiasts looking to showcase and manage their collection online.
+
+
+During the development of this project, I learned a lot about web development and programming in general. Here are some of the key things I learned:
+
+* Working with a full stack web development framework like Next.js
+* Building and deploying a project using Vercel
+* Developing a RESTful API using Node.js and MongoDB
+* Implementing user authentication and authorization
+* Building a web scraper to automate data collection from external sources
+* Implementing a responsive and visually appealing user interface using Tailwind CSS
+* Using environment variables to securely store sensitive information such as database connection strings and API keys
+* Implementing data validation and error handling on the server-side
+* Implementing search and filter functionality on the client-side
+* Testing and debugging the application at various stages of development
 
 ## Getting Started
 
