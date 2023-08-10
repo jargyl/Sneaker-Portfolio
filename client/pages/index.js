@@ -54,7 +54,6 @@ export default function Home() {
   }, []);
 
   const [showQuantity] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -91,7 +90,7 @@ export default function Home() {
   };
 
   return (
-    <div className={darkMode ? "dark" : ""}>
+    <div>
       <Head>
         <title>Bottled Kicks</title>
         <meta
@@ -100,29 +99,15 @@ export default function Home() {
         />
       </Head>
       <main
-        className="font-mandali dark:bg-gray-900 dark:text-white 
+        className="font-mandali  
         text-center flex flex-col fixed w-full h-full"
       >
         <section className="relative px-5 md:px-10 pb-[5vh] md:pb-[10vh] ">
-          <nav className="dark:bg-gray-900 dark:text-white fixed top-0 left-0 right-0 z-10 flex justify-center items-center bg-white h-[7vh] md:h-[10vh] border-solid border-t-0 border-x-0 border-b-2 border-gray-100 dark:border-gray-800 ">
-            <div className="flex items-center gap-1 select-none cursor-pointer">
-              <h1 className="text-2xl md:text-4xl font-[600]">Bottled Kicks</h1>
-              <img
-                src="/bottledkicks_400.png"
-                alt="trainers"
-                className="h-12 md:h-16"
-              />
-            </div>
-
-            <div
-              className={`fixed right-[1%] pr-3 cursor-pointer text-lg flex`}
-              onClick={() => setDarkMode((prev) => !prev)}
-            >
-              {darkMode ? (
-                <BsFillSunFill className="opacity-60" />
-              ) : (
-                <BsFillMoonStarsFill className="opacity-60" />
-              )}
+          <nav className="fixed top-0 left-0 right-0 z-10 flex justify-center items-center bg-white h-[7vh] md:h-[10vh] border-solid shadow-lg border-t-0 border-x-0 border-b-2 border-gray-100">
+            <div className="flex items-center select-none cursor-pointer">
+              <p className="text-md font-bold lg:text-4xl font-futura">
+                BOTTLED KICKS
+              </p>
             </div>
           </nav>
         </section>
@@ -143,7 +128,7 @@ export default function Home() {
               .map((product) => (
                 <div
                   key={product._id}
-                  className="group relative text-xs md:text-sm lg:text-lg cursor-pointer rounded-xl hover:bg-gray-100 hover:shadow-inner hover:delay-75 dark:hover:bg-gray-500  w-1/3 md:w-1/4 lg:w-1/6"
+                  className="group relative text-xs md:text-sm lg:text-lg cursor-pointer rounded-xl hover:bg-gray-100 hover:shadow-inner hover:delay-75   w-1/3 md:w-1/4 lg:w-1/6"
                 >
                   <img
                     src={`https://wsrv.nl/?url=${product.image_url}&h=100&dpr=2&l=6&output=webp`}
@@ -156,7 +141,7 @@ export default function Home() {
                   <p className="leading-1 md:leading-normal mx-1">
                     {product.name}
                   </p>
-                  <span className="absolute top-1 left-2 font-bold bg-gray-100 group-hover:bg-white dark:group-hover:bg-gray-900 group-hover:delay-75 dark:bg-gray-700 rounded-lg p-1 tracking-tight ">
+                  <span className="absolute top-1 left-2 font-bold bg-gray-100 group-hover:bg-white  group-hover:delay-75  rounded-lg p-1 tracking-tight ">
                     <p className={showQuantity ? "group-hover:hidden" : ""}>
                       {product.size}
                     </p>
@@ -208,7 +193,7 @@ export default function Home() {
             </Modal>
           )}
         </SimpleBarReact>
-        <section className=" dark:text-white fixed bottom-0 left-0 right-0 flex justify-center">
+        <section className="  fixed bottom-0 left-0 right-0 flex justify-center">
           <Select
             mode="multiple"
             showArrow={true}

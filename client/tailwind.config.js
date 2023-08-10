@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         mandali: "mandali",
+        futura: "futura",
       },
     },
   },

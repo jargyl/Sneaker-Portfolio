@@ -7,15 +7,19 @@
   margin: 0;
 }
 
-body{
-  margin:auto;
-  font-family: 'Open Sans', sans-serif;
+body {
+  margin: auto;
+  font-family: "Open Sans", sans-serif;
 }
 
+@font-face {
+  font-family: "mandali";
+  src: url("../public/Mandali.ttf");
+  font-display: swap;
+}
 
-
-@font-face{
-  font-family: 'mandali';
-  src: url('../public/Mandali.ttf');
+@font-face {
+  font-family: "futura";
+  src: url("../public/Futura.ttf");
   font-display: swap;
 }
